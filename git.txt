@@ -1,0 +1,394 @@
+Catatan GITHUB :
+
+1. Branching (percabangan) => merging : dengan melakukan "pull request"
+2. Forking (Menduplikat Git yang dimiliki oleh orang lain, lalu kita bisa mengubahnya sesuai keinginan kita 
+            tanpa mengubah Git milik orang lain)
+
+=> Rangkuman:
+   1. GITHUB : BRANCH -> membuat branch di github.
+
+   2. GITHUB : FORK -> melakukan forking.
+
+   3. GIT BRANCH & MERGE -> membuat branch dan melakukan merge pada branch dengan meggunakan git. @
+
+   4. GIT MERGE CONFLICT -> ketika di dua branch (kita dan orang lain) melakukan perubahan di baris yang sama lalu 
+                            ingin melakukan merge maka yang main branch harus mengatasi conflict tersebut manual.
+                            case : 1. ketika kita ingin kembali ke keadaan commit yang lalu, sebelum repo yang
+                                      kita punya sudah berubah
+
+   5. GIT REMOTE -> ketika kita ingin menghubungkan repo lokal kita ke 
+                    repo yang ada di remote(github milik kita "aryarefman"). Jadi ketika kita merubah
+                    repo lokal kita, repo yang ada di remote(github kita) juga berubah/update.
+                    case : 1. ketika kita membuat repo di github, lalu mendeuplikatnya/cloning ke dalam komputer
+                              lokal kita
+                           2. ketika kita membuat repo di komputer lokal kita, lalu kita ingin menghubungkannya
+                              dengan github milik kita
+                           3. Ketika di git hub sudah ada repo, dan di lokal juga sudah ada repo
+                              serta sudah saling terhubung => namun ketika kita edit lokal kita, di sisi 
+                              lain di git hub ada orang lain yang mengedit juga file yang sama di baris yang sama
+
+   6. GIT HUB PAGES -> web hosting gratis dari github. Jika kita ingin membuat url milik kita sendiri
+                       sehingga siapapun bisa mengakses url milik kita.
+                       case : 1. ketika pertama kali membuat web hosting menggunakan git hub
+                              2. ketika sudah pernah membuat web hosting menggunakan git hub
+
+   7. MULTIPLE REMOTES -> terhubung ke beberapa remote. Ketika kita melakukan fork di github, lalu kita ingin
+                          membuat repo yang ada di remote kita (aryarefman) dengan repo yang ada di remote orang
+                          lain (ex. sandhikagalih) dan dengan repo yang ada di lokal kita.
+                          case : 1. ketika remote orang lain(ex. sandhikagalih) melakukan perubahan pada repo
+                                    yang dia punya dan kita ingin repo yang ada di lokal dan di github juga
+                                    melakukan perubahan yang sama/mengupdate hal yang sama
+                                    seperti repo orang lain tersebut
+
+   8. REMOTE BRANCH -> ketika kita memiliki MULTIPLE REMOTES lalu kita ingin melakukan perubahan pada lokal kita,
+                       lalu kita ingin mengajukan perubahan tersebut ke remote milik orang lain 
+                       (ex. sandhikagalih).       
+
+   9. GITIGNORE -> .gitignore => sebuah file yang bisa kita simpan di dalam repository kita , agar di saat ke depanya saat kita 
+                                 melakukan add dan commit ada file yang tidak ikut terbawa ke bagian staging area :
+                                 kita bisa memasukkan file tersebut ke dalam file .gitignore.
+
+   10. GIT REBASE -> menggantikan git workflow merge dengan rebase, ketika kita membuat project yang melibatkan banyak orang
+                     jika menggunakan merge commit yang dihasilkan akan sangat banyak sehingga akan sulit jika kita ingin ngtrack commit, 
+                     tapi jika menggunakan rebase hal itu bisa teratasi.         
+           
+Catatan GIT :
+1. $ git init 
+2. $ git add <file(s)>
+   - $ git add . -> menambahkan seluruh perubahan
+3. $ git status
+4. $ git commit / $ git commit -m ""
+5. $ git config
+6. $ git branch -> mengetahui branch apa aja yang ada di sebuah repository
+7. $ git help
+8. $ git log -> mengetahui history commit yang dilakukan
+   - $ git log -3 -> mengtahui 3 history commit terakhir
+   - $ git log --style.css -> seluruh perubahan terkait style.css akan ditampilkan
+
+==> 3 Area pada repo git : 
+    1. working tree [tempat menyimpan file]
+    2. Staging area [git add]
+    3. History [git commit]
+
+- -- -> untuk menspesifikkan 
+- $ pwd -> melihat kita sekarang ada dimana
+- $ ls -> melihat folder dan file yang berada di dalam suatu directory
+- $ cd desktop -> change directory ke folder desktop 
+- $ git checkout 7667b --style.css (untuk mengembalikan ke keadaan sebelum dirubah/diupdate
+                                     hanya untuk satu file tertentu)
+- $ git status
+  bash: gt: command not found     => membuktikan bahwa kita sudah berhasil melakukan commit
+- $ git commit -am "" -> jika kita mau langsung mengcommit file yang kita modifikasi
+- $ git log --all --decorate --oneline --graph => untuk melihat secara grafik branching yang kita lakukan
+  -> disederhanakan $ alias graph="git log --all --decorate --oneline --graph"
+  -> dengan mengaliaskan kita bisa menyederhanakan command yang panjang
+  -> $ graph => melihat secara grafik branching yang kita lakukan
+
+- $ git branch <nama_branch> => menambahkan branch
+- $ git checkout <nama_branch> => berpindah ke branch lain
+
+==> Jenis Merge :
+    1. Fast Forward => merge yang berlangsung saat branch lain terhubung langsung ke main branch
+    2. Three-way merge/Merge commit => merge yang berlangsung saat branch lain  tidak terhubung langsung ke main branch
+
+==> Penggunaan Merge :
+    1. Pindah dulu ke main branch
+
+- $ git merge <nama_branch> => untuk melakukan merge
+- $ git branch --merge => melihat branch mana aja yang udah dimerge
+- $ git branch -d <nama_branch> => menghapus branch yang sudah dimerge
+- $ git branch -D <nama_branch> => menghapus branch yang belum dimerge
+
+==> Git Merge Conflict : ketika 2 branch mengerjakan baris yang sama dalam satu repo
+
+- q => quit/untuk keluar
+
+==> Jika ingin kembali ke keadaan commit yang sebelumnya: (konflik ketika HEAD lepas dari branch)
+    1. git log -> untuk melihat commit yang sudah kita lakukan
+    2. salin 7 angka pertama hash pada commit
+    3. tekan "q"
+    4. git checkout 1234567 -> berpindah ke commit yang kita inginkan
+    5. setelah itu kita akan berpindah ke commit tersebut
+       dimana kita sudah tidak berada di dalam branch tapi di dalam commit
+
+       "git checkout main -> jika kita ingin kembali ke branch utama"
+
+    6. git branch test -> menambahkan branch baru(test), tapi HEAD belum mengarah ke test
+    7. git checkout test -> agar HEAD mengarah ke test/agar kita berada di branch test
+    8. misalnya kita membuat perubahan pada branch test dan kita commit maka dia akan membuat branch seperti biasa
+  
+
+
+==> Remote (duplikat dari repo yang kita punya)
+    "Menggunakan git hub sebagai remote"
+
+1. Ketika kita membuat repository di git hub lalu menghubungkan atau clone repository tersebut ke dalam komputer
+   lokal kita 
+
+- $ git clone https://github.com/aryarefman/arya-git-test.git -> untuk menduplikat repo yang 
+                                                                 telah kita buat di Git Hub
+-> url (https://github.com/aryarefman/arya-git-test.git) -> berasal dari menyalin url di tombol code<>
+
+- $ git remote
+  origin          -> origin disini merupakan nama default dari remotenya 
+
+- $ git remote -v   => melihat lebih detil lagi
+  origin https://....... (fetch)
+  origin https://....... (push)
+
+- (origin/main, origin/HEAD) -> branch yang ada di remote kita
+
+- saat kita melakukan perubahan pada repository kita di dalam lokal, lalu setelah itu kita melakukan commit
+  ($ git add . -> $ git commit) : branch remote yang kita miliki akan tertinggal satu commit.
+  Oleh karena itu, kita harus melakukan push ($ git push) agar remote kita maju ke commit yang sama dengan
+  repository yang ada di lokal kita
+
+  "(HEAD -> main, origin/main, origin/HEAD)"
+
+-> $ git push => merubah yang ada di website git hub(remote) sama dengan yang ada di git lokal kita
+
+catatan tambahan:
+- $ git config -list => mengecek email git lokal kita (username, useremail)
+
+- Misal di dalam lokal komputer kita terdapat 2 git login yang berbeda, untuk memindahkan git login yang satu
+  dengan yang lain :
+  - $ git config --global user.name "aryarefman"
+  - $ git config --global user.email "arya445refman@gmail.com"
+
+2. Ketika kita membuat repository di dalam git lokal kita lalu ingin menghubungkannya ke git hub
+
+- $ cd -- => kembali ke desktop atau tempat sebelumnya
+- $ mkdir <nama folder> => (make directory) membuat folder langsung di terminal (git bash)
+- $ cd <nama folder>
+- $ git init => untuk membuat folder tadi menjadi repository
+
+- buka git hub, lalu buat repo baru yang judulnya sama dengan repo yang kita buat di git lokal
+- jangan ceklis add a README.file
+- lalu, karena kita sudah punya repo lokal, kita salin git command yang di (..or push an existing repository 
+                                                                            from the command line)
+  -> git remote add origin https://github.com/aryarefman/arya-git-test-2.git
+     git branch -M main
+     git push -u origin main
+  -> tulisan origin boleh bebas
+
+- lalu paste ke git bash
+- $ git remote/$ git remote -v => untuk ngecek apakah repo lokal sudah terhubung dengan git hub
+
+- setelah terhubung, jika kita lakukan perubahan pada vs code :
+- lakukan commit ($ git commit)
+- lalu push ($ git push)
+
+3. Ketika di git hub sudah ada, dan di lokal juga sudah ada => namun ketika kita edit lokal kita, di sisi 
+   lain di git hub ada orang lain yang mengedit juga file yang sama di baris yang sama
+   - $ git fetch => ngecek commit yang ada di remote sudah sampai mana
+   - $ graph => terlihat bahwa commit yang ada di remote dengan di lokal berbeda cabang
+   -> untuk mengatasinya lakukan merge commit
+   - $ git pull => mengambil isi yang ada di remote(git hub)
+   - setelah itu kita selesaikan errornya di vs code yang kita miliki
+   - setelah diedit, lakukan commit
+   - $ git push
+
+==> jika mau menggunakan file orang lain :
+    - download zip
+
+==> GitHub page (web hosting gratis dengan git hub => untuk membuat halaman website kita sendiri):
+    - buat repository di git hub
+    - nama repository <nama git hub>.github.io
+      -> aryarefman.github.io
+    - Tidak perlu diceklis README.file
+    - Lalu jadikan website yang sudah kita buat menjadi repository
+    - Lalu hubungkan repo yang ada di lokal compter dengan git hub (no.2: copy dari git hub lalu paste di git bash)
+    - setelah terhubung dengan remote(github), browser aryarefman.github.io
+
+    -> Jika ingin membuat web kita sendiri yang kedua:
+    - buat folder lalu jadikan repo
+    - lalu lakukan commit
+    - lalu buat repo di github
+      -> nama reponya boleh bebas
+    - lalu simpan repo yang ada di lokal ke github
+    - Setelah itu tekan setting (untuk menjadikan repo menjadi github pages)
+    - cari pages (github pages)
+    - lalu ganti none menjadi main, setelah itu save
+    - reload, lalu di github pagesnya muncul url yang bisa kita gunakan
+    - website tersebut bisa diakses oleh siapa saja
+    - jika kita ingin mengcostum url-nya sesuai dengan yang kita inginkan, kita bisa costum di bagian
+      costum di github pages 
+    
+
+==> Multiple remote (ketika kita ingin terhubung ke beberapa remote sekaligus)
+    - Buka github
+    - Cari repo orang lain, lalu simpan ke dalam akun github kita dan lokal kita
+      -> dengan cara melakukan forking, lalu melakukan cloning ($ git clone <url clone>)
+    - $ ls => ngecek cloningan yang sudah kita lakukan (nama folder/repo)
+    - Setelah itu masuk ke dalam folder cloningan tersebut ($ cd <nama repo>)
+    - $ git remote -v => mengecek remote yang kita punya
+    - nanti yang terlihat, remotenya akan terhubung ke repository yang melakukan fork saja
+      di sisi lain, remotnya tidak terhubung ke repository yang di fork
+    - Agar remotenya terhubung juga ke repo yang di fork, maka kita akan menambah remote baru
+      dengan nama yang berbeda (default nama untuk remote: origin) :
+      -> copy url clone di github repo yang difork
+      -> $ remote add sandhikagalih <url clone>
+    - Setelah melakukan itu, kita berhasil memiliki 2 remote:
+      -> $ git remote (ngecek kita punya remote apa saja)
+         origin
+         sandhika galih
+
+      -> $ git remote -v (ngecek kita punya remote apa saja, tapi lebih detail)
+         origin https://...... (fetch)
+         origin https://...... (push)
+         sandhikagalih https://...... (fetch)
+         sandhika galih https://...... (push)
+
+    - $ graph => melihat commit yang kita lakukan dalam bentuk cabang
+      -> kita akan melihat pointer branch-nya hanya ada dua (ke arah lokal kita dan
+                                                             ke arah origin remote (aryarefman),
+                                                             remote sandhikagalih belum terlihat)
+    - untuk melihat remote sandhikagalih:
+      -> $ git fetch <nama remote> : $ git fetch sandhikagalih
+    - Setelah melakukan itu, lalu kita melakukan $ graph lagi, maka akan terlihat remote sandhikagalih
+      == $ graph
+         ........ (HEAD => main, sandhikagalih/main, origin/main, sandhikagalih/HEAD, origin/HEAD)
+
+      => "posisi pointer branch atau HEAD-nya sudah sama"
+
+    - problem : ketika remote yang di fork melakukan perubahan baru(commit):
+      agar kita tahu bahwa di remote yang di fork ada perubahan:
+      -> $ git fetch sandhikagalih
+      -> $ graph == akan terlihat repo yang di sandhikagalih mendahului satu commit
+
+         " ....(sandhikaglih/main)
+           ....(HEAD -> main, origin/main, origin/HEAD) "
+
+      supaya sama :
+      -> $ git merge sandhikagalih/main
+         
+         = $ graph
+         
+         " ....(HEAD -> main, sandhikaglih/main)
+           ....(origin/main, origin/HEAD) "
+          
+          :> akun github kita (akun yang melakukan fork belum di commit yang sama)
+
+      -> $ git push -u origin main (nge-push commit spesifik ke arah remote yang kita inginkan)
+
+         = $ graph
+          
+           " ....(HEAD -> main, sandhikaglih/main,  origin/main, origin/HEAD) "
+
+
+==> ketika remote kita/remote yang melakukan fork (aryarefman) ingin 
+    mengajukan perubahan ke romote orang lain/remote yang di fork (sandhikagalih) :
+    ==> Remote Branch
+     catatan : jika kita ingin melakukan perubahan pada repo yang kita clone, lakukan perubahannya di dalam branch
+               lain, sehingga main branch tidak terganggu, lalu yang akan kita usulkan ke repo orang lain adalah
+               branch lain tersebut, bukan main branch kita 
+    - $ git checkout -b "<nama branch>" => membuat branch baru, sekaligus kita berpindah ke dalam branch tersebut
+      => gabungan dari : $ git branch <nama branch> + $ git checkout <nama branch>
+         ex. git checkout -b "features"
+
+    - Setelah itu, kita lakukan perubahan pada branch tersebut, lalu ($ git commit -am "")
+    - $ graph => terlihat lokal kita maju satu commit, sisanya masih tertinggal
+ 
+         " ....(HEAD -> features)
+           ....(sandhikaglih/main, origin/main, origin/HEAD, master) "
+
+    - $ git push origin features (perubahan yang ada di branch feature terjadi juga di github kita (aryarefman)  
+       
+         " ....(HEAD -> features, origin/features)
+           ....(sandhikaglih/main, origin/main, origin/HEAD, master) "
+
+    - Lalu usulkan perubahan ke sandhikagalih
+      - buka git hub
+      - lihat repo yang sudah kita fork, lalu pindah ke feature branch
+      - setelah itu, lakukan pull request (di dalam 'contribute') => create pull request
+      - selesai
+      - ketika pull request kita sudah di setujui akan ada tulisan 'close' di repo kita
+      - setelah itu kita akan melakukan perubahan, sehingga repo yang ada di sandhikagalih up ot update
+        dengan repo punya kita:
+        - $ git fetch sandhikagalih
+        - $ graph => kelihatan nanti, repo sandhikagalih/main sudah beberapa commit
+        - lalu kita akan merge repo sandhikhagalih ke repo ke repo aryarefman
+          - pindah dulu ke main branch ($ git checkout main)
+          - $ git merge sandhikagalih/main
+        - $ graph => terlihat repo punya lokal kita dengan sandhikagalih
+        - lalu samakan lagi untuk yang github aryarefman:
+          - git push origin master
+        - sudah sama semuanya
+        
+          "...(HEAD -> main, sandhikagalih/main, origin/main, origin/HEAD)"
+          
+        - jika kita tidak butuh branch features lagi tinggal kita hapus
+          - $ git branch -d "features"
+       
+        - $ graph => branch feature masih ada
+          - untuk menghilangkannya :
+            - $ git push origin --delete features
+   
+        - $ graph 
+   
+
+
+
+==> .gitignore : sebuah file yang bisa kita simpan di dalam repository kita , agar di saat ke depanya saat kita
+                 melakukan add dan commit ada file yang tidak ikut terbawa ke dalam filenya
+    
+    1. Manual
+       - buat repo baru di github (tidak diberi README.file)
+       - create repo
+       - lalu buat repo di lokal kita (munggunakan git bash)
+         -> $ mkdir <nama repo>
+         -> $ git init 
+         -> buat file baru di dalam repo-nya ($ code .) :> (ex. index.html dan style.css)
+         -> lakukan "$ git add ." dan "$ git commit"
+       - push ke dalam github(remote)
+         -> hubungkan repo lokal dengan repo yang ada di github :
+            menyalin baris code yang ada di .push, lalu menyalinnya ke dalam git bash
+       - jalankan .gitignore
+         -> misalnya kita buat file lain di vs code kita (ex. script.js dan config.txt)
+         -> lalu kita hanya ingin menyimpan file script.js saja dimana config.txt tidak mau saya simpan juga :
+            -> buat file .gitignore
+            -> lalu di dalamnya kita mendaftarkan seluruh file" mana saja yang tidak mau kita daftarkan ke staging area
+               (ex. config.txt)
+       - $ git add .
+       - $ git status => akan terlihat tidak ada file config.txt
+
+       ==> catatan :
+           di dalam .gitignore : selain kita bisa mendaftarkan file, kita juga bisa mendaftarkan folder, bisa juga sebuah pola
+           ex. 1. config.txt (file)
+               2. data/ (folder harus ada "/")
+               3. *.exe (jika kita tidak mau menyimpan seluruh file yang ekstensinya .exe)
+       - $ git commit -m ""
+       - $ git push => push kedua dan seterusnya tidak perlu menggunakan -u
+
+
+    2. Otomatis (ada di saat kita membuat repo : ada pilihan .gitignore)
+       - untuk mengetahui file apa saja yang masuk ke dalam ignore, bisa kita lihat di : github.com/github/gitignore atau gitignore.io
+         misalnya : kita menggunakan laravel tinggal dilihat file apa saja yang sebaiknya masuk di .gitignore,
+                    lalu salin seluruh file tersebut masukkan dalam file .gitignore kita 
+
+
+==> Git Rebase
+    -> Git workflow : 1. merge (yang biasanya kita lakukan)
+                      2. rebase (cara lain jika kita mau menerapkan perubahan kita ke main branch tanpa merge)
+    -> Rebase digunakan saat membuat project yang melibatkan banyak orang
+    -> 1. merge : Problem => jika melibatkan banyak orang, commit-nya terlalu banyak sehingga commit sebelumnya susah ditrack
+       2. rebase : solusi dari commit yang banyak tersebut
+    -> Rebase
+       - masuk ke akun github(pemilik repo/main repo)
+       - tekan settings
+       - tekan tulisan colaborators (masukkan colaborators username/fullname/email)
+       - nanti si collaborators akan mendapatkan undangan
+       - atau kita bisa aja menyalin link yang ada di tulisan colaborators, lalu megirimnya lewat chat ke si colaborators/orang lain
+       - kita bisa melakukan claborasi tanpa melakukan pull request
+       - misalnya kita melakukan perubahan pada code kita dan orang lain juga melakukan perubahan pada code-nya :
+         -> pindah ke main branch ($ git checkout main)
+         -> $ git pull => untuk mengupdate jika ada yang berubah di repo aslinya
+         -> $ graph => ngecek perubahan yang terjadi
+         -> pindah ke branch lain yang sudah ada ($ git checkout <nama_branch>)
+            catatan : jika kita melakukan perubahan selalu tambahkan branch, agar yang main branch-nya tidak terganggu
+         -> $ git rebase master
+         -> $ graph => branch lainnya mendahului 2 commit, agar sejajar:
+            - pindah ke main ($ git checkout main)
+            - $ git rebase <nama_branch>
+         -> lalu push ke github kita/orgin remote
+            - $ git push -u origin master
